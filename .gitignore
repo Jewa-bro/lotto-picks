@@ -1,3 +1,4 @@
 dist/
 data/*.part.json
 __pycache__/
+logs/
