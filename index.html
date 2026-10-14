@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f2f4f6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#101013" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>이번 주 로또 번호</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <span class="nav-title">로또 번호 추천</span>
+  </header>
+
+  <main id="app">
+    <div class="seg" role="tablist" aria-label="추천 전략">
+      <button class="seg-btn on" data-mode="ev" role="tab" aria-selected="true" type="button">기대수익 전략</button>
+      <button class="seg-btn" data-mode="master" role="tab" aria-selected="false" type="button">명인 전략</button>
+    </div>
+
+    <section class="hero">
+      <p class="hero-sub" id="next-date"></p>
+      <h1><span id="next-no">-</span> 추천 번호</h1>
+      <p class="notice" id="stale" hidden>새 회차 결과가 아직 반영되지 않았어요</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head games-head">
+        <h2>5게임</h2>
+        <button class="chip-btn" id="reroll" type="button">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          다시 뽑기
+        </button>
+      </div>
+      <ol class="games" id="games"></ol>
+      <p class="legend" id="legend"></p>
+    </section>
+
+    <button class="card row" id="calc-open" type="button">
+      <span class="row-text">
+        <span class="row-title">내 번호로 역대 당첨금 계산하기</span>
+        <span class="row-sub">1회부터 샀다면 얼마를 받았을까요?</span>
+      </span>
+      <svg class="chev" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <section class="card">
+      <div class="card-head">
+        <h2 id="latest-title">당첨번호</h2>
+        <span class="caption" id="latest-date"></span>
+      </div>
+      <div class="balls latest" id="latest-balls"></div>
+      <p class="caption prize" id="latest-prize"></p>
+    </section>
+
+    <footer class="foot">
+      <p>로또 추첨은 매회 독립적이라 어떤 번호든 당첨 확률은 같아요. 판매액의 약 절반만 당첨금으로 돌아오니 재미로만 즐기세요.</p>
+      <p>당첨번호 출처: 동행복권</p>
+    </footer>
+  </main>
+
+  <div class="sheet-backdrop" id="sheet-backdrop" hidden></div>
+  <section class="sheet tall" id="calc" role="dialog" aria-modal="true" aria-labelledby="calc-title" hidden>
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <h2 class="sheet-title" id="calc-title">내 번호로 역대 당첨금</h2>
+      <button class="icon-btn" data-close type="button" aria-label="닫기">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <p class="caption" id="calc-help"></p>
+    <div class="picker" id="picker"></div>
+    <div class="calc-actions">
+      <button class="btn weak" id="calc-reset" type="button">초기화</button>
+      <button class="btn primary" id="calc-run" type="button" disabled>계산하기</button>
+    </div>
+    <div class="calc-result" id="calc-result" hidden></div>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="strategy.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

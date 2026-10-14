@@ -1,0 +1,401 @@
+:root {
+  --bg: #f2f4f6;
+  --surface: #ffffff;
+  --text: #191f28;
+  --text-2: #4e5968;
+  --text-3: #8b95a1;
+  --line: #f2f4f6;
+  --blue: #3182f6;
+  --blue-press: #1b64da;
+  --blue-weak: #e8f3ff;
+  --blue-weak-text: #1b64da;
+  --grey-btn: #f2f4f6;
+  --grey-btn-press: #e5e8eb;
+  --grey-btn-text: #4e5968;
+  --red-weak: #fff0f0;
+  --red-text: #f04452;
+  --dim: rgba(0, 0, 0, 0.44);
+  --toast: rgba(25, 31, 40, 0.92);
+  --ball-y: #fbc400;
+  --ball-b: #69c8f2;
+  --ball-r: #ff7272;
+  --ball-g: #aaaaaa;
+  --ball-e: #b0d840;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101013;
+    --surface: #1c1c21;
+    --text: #e4e4e5;
+    --text-2: #b0b0b6;
+    --text-3: #7e7e87;
+    --line: #2c2c35;
+    --blue: #3485fa;
+    --blue-press: #2272eb;
+    --blue-weak: #1a2b45;
+    --blue-weak-text: #6aaeff;
+    --grey-btn: #2c2c35;
+    --grey-btn-press: #3c3c47;
+    --grey-btn-text: #e4e4e5;
+    --red-weak: #3b1d22;
+    --red-text: #ff6b76;
+    --dim: rgba(0, 0, 0, 0.6);
+    --toast: rgba(60, 60, 71, 0.95);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101013;
+  --surface: #1c1c21;
+  --text: #e4e4e5;
+  --text-2: #b0b0b6;
+  --text-3: #7e7e87;
+  --line: #2c2c35;
+  --blue: #3485fa;
+  --blue-press: #2272eb;
+  --blue-weak: #1a2b45;
+  --blue-weak-text: #6aaeff;
+  --grey-btn: #2c2c35;
+  --grey-btn-press: #3c3c47;
+  --grey-btn-text: #e4e4e5;
+  --red-weak: #3b1d22;
+  --red-text: #ff6b76;
+  --dim: rgba(0, 0, 0, 0.6);
+  --toast: rgba(60, 60, 71, 0.95);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", Roboto, sans-serif;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+body.locked { overflow: hidden; }
+button { font: inherit; color: inherit; }
+
+/* 상단 바 */
+.nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  height: 54px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+}
+.nav-title { font-size: 17px; font-weight: 600; }
+
+main {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+/* 전략 탭 */
+.seg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  margin: 4px 0 8px;
+  border-radius: 14px;
+  background: var(--grey-btn-press);
+}
+.seg-btn {
+  appearance: none;
+  border: 0;
+  min-height: 40px;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-3);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+.seg-btn.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); }
+
+/* 헤드라인 */
+.hero { padding: 12px 8px 24px; }
+.hero-sub { margin: 0 0 6px; color: var(--text-2); font-size: 15px; font-weight: 500; }
+h1 { margin: 0; font-size: 26px; line-height: 1.38; font-weight: 700; letter-spacing: -0.02em; }
+h2 { margin: 0; font-size: 18px; font-weight: 700; }
+.notice {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--red-weak);
+  color: var(--red-text);
+  font-size: 14px;
+  font-weight: 500;
+}
+.caption { margin: 0; color: var(--text-3); font-size: 14px; }
+
+/* 카드 */
+.card {
+  display: block;
+  width: 100%;
+  background: var(--surface);
+  border: 0;
+  border-radius: 20px;
+  padding: 22px 20px;
+  margin-bottom: 12px;
+  text-align: left;
+}
+.card-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; }
+
+/* 추천 게임 */
+.games { list-style: none; margin: 0; padding: 0; }
+.game { display: flex; align-items: center; gap: 12px; padding: 9px 0; }
+.game:first-child { padding-top: 0; }
+.label {
+  flex: none;
+  width: 22px;
+  color: var(--text-3);
+  font-size: 15px;
+  font-weight: 600;
+}
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--text-3);
+  font-size: 13px;
+}
+.dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--text); }
+.tag {
+  flex: none;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--blue-weak);
+  color: var(--blue-weak-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+.prize { margin-top: 14px; }
+.small { font-size: 12px; margin-top: 8px; }
+
+/* 공 */
+.balls { display: flex; gap: 6px; align-items: center; }
+.ball {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.ball.sm { width: 34px; height: 34px; font-size: 14px; }
+.ball.y { background: var(--ball-y); }
+.ball.b { background: var(--ball-b); }
+.ball.r { background: var(--ball-r); }
+.ball.g { background: var(--ball-g); }
+.ball.e { background: var(--ball-e); }
+.ball.anchor { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--text); }
+.latest { justify-content: space-between; gap: 4px; }
+.latest .plus { color: var(--text-3); font-weight: 600; }
+@media (max-width: 360px) {
+  .ball { width: 34px; height: 34px; font-size: 14px; }
+  .ball.sm { width: 30px; height: 30px; font-size: 13px; }
+  .latest .ball { width: 32px; height: 32px; }
+  .game { gap: 8px; }
+}
+
+/* 리스트 행 */
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 0.1s, background-color 0.1s;
+}
+.row-text { display: flex; flex-direction: column; gap: 2px; }
+.row-title { font-size: 17px; font-weight: 600; }
+.row-sub { color: var(--text-3); font-size: 14px; }
+.chev { color: var(--text-3); flex: none; }
+.row:active { transform: scale(0.98); background: var(--grey-btn); }
+
+/* 당첨 내역 행 */
+.win-main { flex: 1; display: flex; flex-direction: column; }
+.win-title { font-size: 16px; font-weight: 600; }
+.win-sub { color: var(--text-3); font-size: 14px; }
+
+.foot { padding: 12px 8px; color: var(--text-3); font-size: 12px; }
+.foot p { margin: 0 0 4px; }
+.error { padding: 60px 0; text-align: center; color: var(--text-3); }
+
+/* 역대 당첨금 계산 */
+.sheet.tall { max-height: 92vh; }
+.sheet-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.sheet-top .sheet-title { margin: 0; }
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-right: -8px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: var(--text-3);
+  cursor: pointer;
+}
+.icon-btn:active { background: var(--grey-btn); }
+.picker { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin: 16px 0; }
+.pick {
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 50%;
+  background: var(--grey-btn);
+  color: var(--text-2);
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.pick:active { transform: scale(0.92); }
+.pick.on { color: #fff; }
+.pick.on.y { background: var(--ball-y); }
+.pick.on.b { background: var(--ball-b); }
+.pick.on.r { background: var(--ball-r); }
+.pick.on.g { background: var(--ball-g); }
+.pick.on.e { background: var(--ball-e); }
+.calc-actions { display: grid; grid-template-columns: 1fr 1.6fr; gap: 8px; }
+.btn:disabled { opacity: 0.4; cursor: default; transform: none; }
+.calc-result { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); scroll-margin-top: 12px; }
+.result-balls { margin-bottom: 12px; }
+.big { margin: 4px 0 6px; font-size: 28px; font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; }
+.net { margin: 0 0 20px; font-size: 15px; font-weight: 600; }
+.net.minus { color: var(--red-text); }
+.net.plus { color: var(--blue); }
+.rank-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 12px; }
+.rank-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  border-radius: 12px;
+  background: var(--bg);
+}
+.rank-name { font-size: 12px; color: var(--text-3); }
+.rank-count { font-size: 16px; font-weight: 700; color: var(--text-3); }
+.rank-cell.has .rank-count { color: var(--text); }
+.wins { list-style: none; margin: 0 0 8px; padding: 0; }
+.win { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+.win.empty { color: var(--text-3); font-size: 15px; }
+.win-amt { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* 버튼 */
+.btn {
+  appearance: none;
+  border: 0;
+  min-height: 56px;
+  border-radius: 16px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s, background-color 0.1s;
+}
+.btn:active { transform: scale(0.97); }
+.btn.primary { background: var(--blue); color: #fff; }
+.btn.primary:active { background: var(--blue-press); }
+.btn.weak { background: var(--grey-btn); color: var(--grey-btn-text); }
+.btn.weak:active { background: var(--grey-btn-press); }
+
+/* 추천 카드의 다시 뽑기 */
+.games-head { align-items: center; margin-bottom: 14px; }
+.chip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 36px;
+  padding: 0 12px 0 10px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--blue-weak);
+  color: var(--blue-weak-text);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.chip-btn:active { transform: scale(0.96); }
+.chip-btn.spin svg { animation: spin 0.45s ease-out; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.games.fresh .ball { animation: pop 0.35s ease-out backwards; }
+.games.fresh .game:nth-child(2) .ball { animation-delay: 0.04s; }
+.games.fresh .game:nth-child(3) .ball { animation-delay: 0.08s; }
+.games.fresh .game:nth-child(4) .ball { animation-delay: 0.12s; }
+.games.fresh .game:nth-child(5) .ball { animation-delay: 0.16s; }
+@keyframes pop { from { transform: scale(0.6); opacity: 0; } }
+
+/* 바텀시트 */
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: var(--dim);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 31;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  margin: 0 auto;
+  padding: 12px 24px calc(16px + env(safe-area-inset-bottom));
+  background: var(--surface);
+  border-radius: 24px 24px 0 0;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.sheet-backdrop.open { opacity: 1; }
+.sheet.open { transform: translateY(0); }
+.sheet-handle { width: 40px; height: 4px; border-radius: 2px; background: var(--grey-btn-press); margin: 0 auto 20px; }
+.sheet-title { font-size: 22px; margin-bottom: 20px; }
+
+/* 토스트 */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  z-index: 40;
+  transform: translate(-50%, 8px);
+  max-width: calc(100% - 32px);
+  padding: 12px 20px;
+  border-radius: 14px;
+  background: var(--toast);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
